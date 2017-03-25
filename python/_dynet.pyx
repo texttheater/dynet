@@ -2026,6 +2026,17 @@ cdef class StackedRNNState:
         return states
 #}}}
 
+cdef class JacobianBuilder: # {{{
+    cdef CJacobianBuilder *thisptr
+    def __cinit__(self):
+        self.thisptr = new CJacobianBuilder()
+
+    def calc_jacobian(self, Expression start, Expression end):
+        return Expression.from_cexpr(_cg.version(), self.thisptr.calc_jacobian(start.c(), end.c()))
+
+    def whoami(self): return "JacobianBuilder"
+#}}}
+
 # }}}
 
 # {{{ Training 

@@ -420,6 +420,11 @@ cdef extern from "dynet/fast-lstm.h" namespace "dynet":
         #vector[CExpression] get_s(CRNNPointer i)
         #CRNNPointer state()
 
+cdef extern from "dynet/jacobian.h" namespace "dynet":
+    cdef cppclass CJacobianBuilder "dynet::JacobianBuilder":
+        CJacobianBuilder()
+        CExpression calc_jacobian(CExpression &start, CExpression &end)
+
 cdef extern from "python/pybridge.h" namespace "pydynet":
     cdef cppclass CModelSaver "pydynet::ModelSaver":
         CModelSaver(string filename, CModel *model)
