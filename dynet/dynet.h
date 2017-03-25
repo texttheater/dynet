@@ -19,6 +19,7 @@
 #include "dynet/tensor.h"
 #include "dynet/model.h"
 #include "dynet/devices.h"
+#include "dynet/node-types.h"
 
 
 namespace dynet {
@@ -480,6 +481,13 @@ struct Node {
                              const Tensor& dEdf,
                              unsigned i,
                              Tensor& dEdxi) const = 0;
+
+  /**
+   * \brief Get the node type
+   * \details This gives you the type of node if needed for some type of
+   *          special operation not implemented in the node class itself.
+   */
+  virtual NodeType node_type() const { return NodeType::UNK; };
 
   /**
    * \brief Whether this node supports computing multiple batches in one call.

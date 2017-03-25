@@ -925,4 +925,14 @@ Dim RandomUniform::dim_forward(const vector<Dim>& xs) const {
   return dim;
 }
 
+string IdentityMatrix::as_string(const vector<string>& arg_names) const {
+  ostringstream s;
+  s << "identity_matrix(" << dim << ')';
+  return s.str();
+}
+
+Dim IdentityMatrix::dim_forward(const vector<Dim>& xs) const {
+  return Dim({dim,dim});
+}
+
 } // namespace dynet

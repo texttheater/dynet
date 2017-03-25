@@ -17,6 +17,7 @@ set(dynet_library_SRCS
     gru.cc
     hsm-builder.cc
     init.cc
+    jacobian.cc
     lstm.cc
     mem.cc
     model.cc
@@ -58,6 +59,7 @@ set(dynet_library_HDRS
     gru.h
     hsm-builder.h
     init.h
+    jacobian.h
     lstm.h
     mem.h
     model.h
@@ -65,6 +67,7 @@ set(dynet_library_HDRS
     nodes.h
     nodes-contract.h
     nodes-conv.h
+    node-types.h
     param-nodes.h
     rnn-state-machine.h
     rnn.h

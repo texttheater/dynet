@@ -4,6 +4,7 @@
 #include "dynet/dynet.h"
 #include "dynet/devices.h"
 #include "dynet/nodes-macros.h"
+#include "dynet/node-types.h"
 
 // See nodes-macros.h for more details about DYNET_NODE_DEFINE_DEV_IMPL().
 
@@ -322,6 +323,7 @@ struct MaxPooling1D : public Node {
 struct MatrixMultiply : public Node {
   explicit MatrixMultiply(const std::initializer_list<VariableIndex>& a) : Node(a) {}
   virtual bool supports_multibatch() const override { return true; }
+  virtual NodeType node_type() const override { return NodeType::MatrixMultiply; }
   DYNET_NODE_DEFINE_DEV_IMPL()
 };
 
@@ -589,6 +591,13 @@ struct RandomUniform : public Node {
   DYNET_NODE_DEFINE_DEV_IMPL()
   Dim dim;
   real left, right;
+};
+
+// creates a d-by-d identity matrix
+struct IdentityMatrix : public Node {
+  explicit IdentityMatrix(unsigned d) : dim(d) {}
+  DYNET_NODE_DEFINE_DEV_IMPL()
+  unsigned dim;
 };
 
 

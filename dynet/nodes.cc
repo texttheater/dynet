@@ -2286,4 +2286,22 @@ void RandomUniform::backward_dev_impl(const MyDevice & dev,
 }
 DYNET_NODE_INST_DEV_IMPL(RandomUniform)
 
+template<class MyDevice>
+void IdentityMatrix::forward_dev_impl(const MyDevice & dev, const vector<const Tensor*>& xs, Tensor& fx) const {
+  DYNET_ASSERT(xs.size() == 0, "Failed dimension check in IdentityMatrix::forward");
+  TensorTools::Identity(fx);
+}
+
+template<class MyDevice>
+void IdentityMatrix::backward_dev_impl(const MyDevice & dev,
+                             const vector<const Tensor*>& xs,
+                             const Tensor& fx,
+                             const Tensor& dEdf,
+                             unsigned i,
+                             Tensor& dEdxi) const {
+  DYNET_RUNTIME_ERR("Called backward() on an arity 0 node");
+}
+DYNET_NODE_INST_DEV_IMPL(IdentityMatrix)
+
+
 } // namespace dynet
